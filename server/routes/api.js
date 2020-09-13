@@ -9,9 +9,13 @@ router.post('/user', userController.addUser, (req, res) => {
 
 
 //Put request, skill level and language
+<<<<<<< HEAD
 router.put('/skill', userController.addSkillLanguage,
     (req, res) => res.status(200).json({})
 );
+=======
+// router.put('/skill', userController.addSkillLanguage);
+>>>>>>> master
 
 //get request for partner
 router.get('/partner', userController.findPartner,
@@ -19,6 +23,7 @@ router.get('/partner', userController.findPartner,
   
 );
 
+<<<<<<< HEAD
 // //Put request, update partners Yes/No,
 // router.put('/feedback', userController.updateUserFeedback,
 //     (req, res) => res.status(200).json({})
@@ -28,5 +33,12 @@ router.get('/partner', userController.findPartner,
 router.put('/session', userController.incrementSessionCount,
     (req, res) => res.status(200).json({})
 );
+=======
+//Put request, update partners Yes/No,
+// router.put('/feedback', userController.updateUserFeedback);
+
+// //Put request, increment session count
+// router.put('/session', userController.incrementSessionCount);
+>>>>>>> master
 
 module.exports = router;
