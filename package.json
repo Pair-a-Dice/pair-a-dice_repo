@@ -2,9 +2,10 @@
   "name": "pair-a-dice_repo",
   "version": "1.0.0",
   "description": "Pair-a-Dice Scratch Project",
-  "main": "webpack.config.js",
+  "main": "/server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon /server/server.js"
   },
   "repository": {
     "type": "git",
