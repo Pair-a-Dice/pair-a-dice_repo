@@ -10,10 +10,15 @@ import SessionRoom from './containers/SessionRoom.jsx';
 
 import './styles.css';
 
-const App = props => {
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
   return (
     <div className="router">
       <main>
+        {/* <WaitingRoom /> */}
         <Switch>
           <Route
             exact
@@ -34,6 +39,7 @@ const App = props => {
       </main>
     </div>
   );
+}
 }
 
 export default App;
