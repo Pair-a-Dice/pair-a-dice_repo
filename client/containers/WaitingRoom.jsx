@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+//import store from '../store.js'
+//import { render } from 'react-dom';
 
 // import our children components
 // import AccountInfo from '../components/AccountInfo.jsx'
@@ -11,11 +13,16 @@ import * as actions from '../actions/actions.js';
 
 // mapStateToProps
 const mapStateToProps = state => ({
-  // add pertinent state here, auto given store state
-
+  // add pertinent Lstate here, auto given store state
+  // marketId: state.session.lastMarketId,
+  // abc: state.userSessions.abc,
 })
 
 const mapDispatchToProps = dispatch => ({
+  // addUser: (newUser) => dispatch(actions.addUser(newUser)),
+  // updateLanguageLevelStatus: (languageLevelStatus) => dispatch(actions.updateLanguageLevelStatus(languageLevelStatus)),
+  findPartner: (partner) => dispatch(actions.findPartner(partner)),
+  // incrementSessionCount: () => dispatch(actions.incrementSessionCount()),
 
 })
 
@@ -26,7 +33,7 @@ class WaitingRoom extends Component {
 
   // render Logo and LoginForm Component
   render() {
-
+    //console.log("waitingroom props", props);
 
     return(
       <div className="waiting-room-container">
@@ -38,10 +45,15 @@ class WaitingRoom extends Component {
           Hello, Friend...<br />
           Please choose a level and language!<br />
         </div>
-        <div className="level-language-form">
+        <div className="vel-language-form">
           {/* <LevelLanguageForm /> */}
           {/* Temp link to session-room  */}
-          <Link to="/session-room" className="session-room-link">Link to Session Room</Link>
+          <button
+              id="waiting-room-button"
+              type="button"
+              onClick={() => this.props.findPartner()}
+            >Button</button>
+          <Link to="/session-room" className="session-room-link">Session Room</Link>
         </div>
       </div>
     )
