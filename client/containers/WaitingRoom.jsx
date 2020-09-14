@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-//import store from '../store.js'
-//import { render } from 'react-dom';
 
 // import our children components
 // import AccountInfo from '../components/AccountInfo.jsx'
@@ -13,15 +11,14 @@ import * as actions from '../actions/actions.js';
 
 // mapStateToProps
 const mapStateToProps = state => ({
-  // add pertinent Lstate here, auto given store state
-  // marketId: state.session.lastMarketId,
-  // abc: state.userSessions.abc,
+  userName: state.main.currentUser.username,
+  sessionCount: state.main.currentUser.sessioncount
 })
 
 const mapDispatchToProps = dispatch => ({
   // addUser: (newUser) => dispatch(actions.addUser(newUser)),
   // updateLanguageLevelStatus: (languageLevelStatus) => dispatch(actions.updateLanguageLevelStatus(languageLevelStatus)),
-  findPartner: (partner) => dispatch(actions.findPartner(partner)),
+  findPartner: () => dispatch(actions.findPartner()),
   // incrementSessionCount: () => dispatch(actions.incrementSessionCount()),
 
 })
@@ -33,7 +30,7 @@ class WaitingRoom extends Component {
 
   // render Logo and LoginForm Component
   render() {
-    //console.log("waitingroom props", props);
+    console.log("waiting room props", this.props)
 
     return(
       <div className="waiting-room-container">
