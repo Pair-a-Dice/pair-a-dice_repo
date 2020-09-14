@@ -30,4 +30,10 @@ router.put('/session', userController.incrementSessionCount, userController.stat
     (req, res) => res.status(200).json({})
 );
 
+// //Put request, update partners Yes/No,
+// router.put('/feedback', userController.updateUserFeedback,
+//     (req, res) => res.status(200).json({})
+// );
+
+
 module.exports = router;

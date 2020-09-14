@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 app.use('/api', apiRouter);
 
 
-
 //Start server
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);
