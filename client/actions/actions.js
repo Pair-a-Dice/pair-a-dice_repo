@@ -14,9 +14,9 @@ export const updateLanguageLevelStatus = (languageLevelStatus) => ({
   payload: languageLevelStatus,
 });
 
-export const findPartner = (partner) => ({
+export const findPartner = () => ({
   type: types.FIND_PARTNER,
-  payload: partner,
+  // payload: partner,
 });
 
 export const incrementSessionCount = () => ({

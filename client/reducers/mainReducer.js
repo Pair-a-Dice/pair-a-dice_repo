@@ -2,8 +2,16 @@ import * as types from '../constants/actionTypes';
 
 // userSessions:[{session: {1 session}, mainuser:{}, partner:{}},...] 
 const initialState = {
-  userSessions: [] // store response from database
-  //userPair: [currentUser: {}, partnerUser: {}] // to use for session room
+  currentUser: {
+    _id: 5,
+    username: 'usertest',
+    sessioncount: 10
+  },
+  currentPartner: {
+    _id: 4,
+    partnername: 'partnertest1',
+    sessioncount: 2    
+  } 
 };
 
 // const initialState = {
@@ -36,24 +44,38 @@ switch(action.type) {
 
   // LevelLanguage
 
-  // Increment Session
-
   // Find Partner
   case types.FIND_PARTNER:
-    console.log("this is find_partner in mainReducer");
-    // fetch request to get a partner list
-    // response object = [{}...]
-    //// choose a partner from the list
 
-    // update the state with user, partner and session info
+    let partner;
+    partner = {
+      _id: 7,
+      partnername: 'partnertest2',
+      sessioncount: 7    
+    } 
+    // fetch request to get a partner list
+    // fetch('/api/partner' + '/' + 'Javascript' + '&' + 'skill' 
+    fetch('http://localhost:8080/api/partner/?language=Javascript&skill=Easy&_id=5')  //http://localhost:8080/api/partner
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      // partner = data;
+      console.log("data", data);
+    })
+    .catch(err => console.log(err));
+
+    console.log("state before find partner", {...state})
+    console.log("state after find partner", {...state, currentPartner: partner})
 
       // return updated state
       return {
-        // ...state,
-        // response.user
-        // response.partner
+        ...state,
+        currentPartner: partner
       };
 
+  // Increment Session
+  
   // Pair Again
 
    default:
