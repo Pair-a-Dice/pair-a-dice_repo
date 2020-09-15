@@ -8,14 +8,9 @@ import { Link } from 'react-router-dom';
 // import actions
 import * as actions from '../actions/actions.js';
 
-// mapStateToProps
-const mapStateToProps = state => ({
-  // add pertinent state here, auto given store state
-
-})
 
 const mapDispatchToProps = dispatch => ({
-
+  verifyUser: (newUser) => dispatch(actions.verifyUser(newUser)),
 })
 
 class Login extends Component {
@@ -25,20 +20,57 @@ class Login extends Component {
 
   // render Logo and LoginForm Component
   render() {
+
+    let usernameInput;
+    let passwordInput;
+
     return(
       <div className="login-container">
         <div className="login-logo">
-        Pairadice V.2
+        pair/a\dice
+        {/* 👥🎲 */}
         </div>
+        <div className="login-subTitle">
+        Pair-programming roulette.<br />
+        </div>
+        <div className="dice">🎲🎲</div>
         <div className="login-form">
-          <Link to="/waiting-room" className="waiting-room-link">Waiting Room</Link>
-          {/* <LoginForm
-
-          /> */}
+          <span className="input-fields">
+            <input
+              type="text"
+              id="username-input"
+              placeholder="Username"
+              onChange={e => usernameInput = e.target.value}
+            ></input>
+            <input
+              type="text"
+              id="password-input"
+              placeholder="Password"
+              onChange={e => passwordInput = e.target.value}
+            ></input>
+          </span>
+          <div className="button-container">
+            <span className="login-register-buttons">
+              <Link to="/waiting-room" className="waiting-room-link">
+                <button 
+                  id="register-button"
+                  type="button"
+                  // onClick={() => this.props.addUser()}
+                >Register</button>
+              </Link>
+              <Link to="/waiting-room" className="waiting-room-link">
+                <button 
+                  id="login-button"
+                  type="button"
+                  onClick={() => this.props.verifyUser({username: usernameInput, password: passwordInput})}
+                >Login</button>
+              </Link>
+              </span>
+          </div>
         </div>
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

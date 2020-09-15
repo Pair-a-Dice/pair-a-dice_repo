@@ -7,6 +7,10 @@ router.post('/user', userController.addUser, (req, res) => {
     res.status(200).json(res.locals.user);
 });
 
+//Get request for login
+router.get('/user', userController.verifyUser, (req, res) => {
+  res.status(200).json(res.locals.user);
+});
 
 //Put request, skill level and language
 router.put('/skill', userController.addSkillLanguage,
@@ -14,10 +18,10 @@ router.put('/skill', userController.addSkillLanguage,
 );
 
 //get request for partner
-router.get('/partner', userController.findPartner, userController.statusReady,(req, res) => {
-  // res.status(200).json(res.locals.partner);
-  console.log(res.locals.partner);
-  res.send(res.locals.partner);
+router.get('/partner', userController.findPartner, (req, res) => {
+   console.log("this is in api", res.locals.partner);
+   res.status(200).json(res.locals.partner);
+  ///res.send(res.locals.partner);
 });
 
 // //Put request, update partners Yes/No,
@@ -26,7 +30,7 @@ router.post('/feedback', userController.sessionFeedback,
 );
 
 //Put request, increment session count
-router.put('/session', userController.incrementSessionCount, userController.statusNotReady,
+router.put('/session', userController.incrementSessionCount, 
     (req, res) => res.status(200).json({})
 );
 

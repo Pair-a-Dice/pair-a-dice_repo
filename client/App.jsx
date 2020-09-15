@@ -8,7 +8,7 @@ import WaitingRoom from './containers/WaitingRoom.jsx';
 import SessionRoom from './containers/SessionRoom.jsx';
 
 
-import './styles.css';
+import './styles.scss';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class App extends Component {
   return (
     <div className="router">
       <main>
-        {/* <WaitingRoom /> */}
         <Switch>
           <Route
             exact

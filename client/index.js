@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import store from './store.js';
 
-// import './styles.css';
+import './styles.scss';
 
 render(
   // wrap the App in the Provider and pass in the store
