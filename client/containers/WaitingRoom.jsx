@@ -11,7 +11,7 @@ import * as actions from '../actions/actions.js';
 
 // mapStateToProps
 const mapStateToProps = state => ({
-  userName: state.main.currentUser.username,
+  username: state.main.currentUser.username,
   sessionCount: state.main.currentUser.sessioncount
 })
 
@@ -26,31 +26,52 @@ const mapDispatchToProps = dispatch => ({
 class WaitingRoom extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      toggle: 'off',
+    }
   }
 
+  componentDidMount() {
+    this.setState({ toggle: 'on' })
+  }
   // render Logo and LoginForm Component
   render() {
-    console.log("waiting room props", this.props)
+    
+    console.log(this.state.toggle)
 
     return(
       <div className="waiting-room-container">
-        <span className="waiting-room-navbar">
-          <span className="logo">Pairadise</span>
-          {/* <AccountInfo /> */}
-        </span>
+        {/* <span className="waiting-room-navbar"> */}
+          <span className="login-logo">pair/a\dice</span>
+        {/* </span> */}
         <div className="greeting">
-          Hello, Friend...<br />
-          Please choose a level and language!<br />
+          <center>
+            Hello Friend,<br /><br />
+            Please choose a level and language!<br />
+          </center>
         </div>
-        <div className="vel-language-form">
-          {/* <LevelLanguageForm /> */}
-          {/* Temp link to session-room  */}
-          <button
-              id="waiting-room-button"
-              type="button"
-              onClick={() => this.props.findPartner()}
-            >Button</button>
-          <Link to="/session-room" className="session-room-link">Session Room</Link>
+        <div className="drop-down">
+          <span className="selectors">
+            <select className="skill-selector">
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+            <select className="language-selector">
+              <option value="Javascript">Javascript</option>
+              <option value="Python">Python</option>
+              <option value="C">C</option>
+            </select>
+          </span>
+        </div>
+        <div className="level-language-form">
+          <Link to="/session-room" className="session-room-link">
+            <button
+                id="waiting-room-button"
+                type="button"
+                // onClick={() => this.props.findPartner()}
+            >FIND PARTNER</button>
+          </Link>
         </div>
       </div>
     )

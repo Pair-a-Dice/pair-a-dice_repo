@@ -26,6 +26,29 @@ userController.addUser = (req, res, next) => {
     
 }
 
+//Adding middleware to get login information
+userController.verifyUser = (req, res, next) => {
+  const { username, password } = req.body;
+  // console.log('username: ', username);
+  // console.log('password: ', password);
+  const queryText = `SELECT _id, username, sessioncount FROM users WHERE username = $1 AND password = $2`
+  const queryParams = [req.query.username, req.query.password]
+
+  db.query(queryText, queryParams)
+    .then((result) => {
+      res.locals.user = (result.rows[0]);
+      res.status(200).json(res.locals.user)
+      // return next();
+    })
+    .catch((err) => {
+      next({
+        log: 'Error in verifyUser middleware function',
+        message: { err },
+      });
+    });
+    // next();
+}
+
 //Updates skill level and language.
 userController.addSkillLanguage = (req, res, next) => {
   const { skill, language, _id } = req.body;
@@ -51,20 +74,28 @@ userController.addSkillLanguage = (req, res, next) => {
 //Need to add new query
 userController.findPartner = (req, res, next) => {
   const { language, skill, _id } = req.body;
-   const queryText = `SELECT _id FROM users WHERE language = $1 AND skill = $2 AND status = 'Ready' AND _id != $3
+   const queryText = 
+    `SELECT _id, username, sessioncount FROM users WHERE language = $1 AND skill = $2 AND status = 'Ready' AND _id != $3
     EXCEPT
-    SELECT partnerb_id FROM sessions WHERE (partnera_id = $3 AND partnera_feedback = 'No') OR (partnera_id = $3 AND partnerb_feedback = 'No')
+    SELECT partnerb_id, partnera_feedback, partnerb_id  FROM sessions WHERE (partnera_id = $3 AND partnera_feedback = 'No') OR (partnera_id = $3 AND partnerb_feedback = 'No')
     EXCEPT
-    SELECT partnera_id FROM sessions WHERE (partnerb_id = $3 AND partnerb_feedback = 'No') OR (partnerb_id = $3 AND partnera_feedback = 'No')
+    SELECT partnera_id, partnera_feedback, partnera_id  FROM sessions WHERE (partnerb_id = $3 AND partnerb_feedback = 'No') OR (partnerb_id = $3 AND partnera_feedback = 'No')
     ORDER BY _id`
    
    const queryParams = [req.query.language, req.query.skill, req.query._id]
      db.query(queryText, queryParams)
       .then((result) => {
-        res.locals.partner = res.json(result.rows[0]._id);
-        console.log(res.locals.partner);
+        res.locals.partner = res.json(result.rows[0]);
+       // console.log(res.locals.partner);
         return next();
       }) 
+      .catch((err) => {
+        next({
+          log: 'Error in findPartner middleware function',
+          message: { err },
+        });
+       });
+   next();
     // next();
 }   
 
@@ -78,7 +109,13 @@ userController.statusReady = (req, res, next) => {
         res.locals.status = result.rows[0].status
         return next();
       }) 
-    next();
+      .catch((err) => {
+        next({
+          log: 'Error in statusReady middleware function',
+          message: { err },
+        });
+       });
+   next();
 }   
 
 //set status not ready
@@ -91,7 +128,13 @@ userController.statusNotReady = (req, res, next) => {
         res.locals.status = result.rows[0].status
         return next();
       }) 
-    next();
+      .catch((err) => {
+        next({
+          log: 'Error in statusNotReady middleware function',
+          message: { err },
+        });
+       });
+   next();
 }  
 
 //Middleware runs after session has ended and user enters feedback.
@@ -104,7 +147,13 @@ userController.sessionFeedback = (req, res, next) => {
     .then((result) => {
       res.locals.feedback = result.rows[0];
     })
-    next();
+    .catch((err) => {
+      next({
+        log: 'Error in sessionFeedback middleware function',
+        message: { err },
+      });
+     });
+ next();
 }
 
 //Number of sessions each user participates in increases by one.

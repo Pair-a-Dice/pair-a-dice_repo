@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: 20;
+
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // width: 100vw;
+  // height: 100vw;
+}
+
+.login-logo {
+  font-size: 30px;
+  margin-top: 40px;
+}
+
+.login-subTitle {
+  font-size: 14px;
+  font-style: italic;
+  margin: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 40px;
+}
+
+.dice {
+  margin: 40px;
+}
+
+#register-button {
+  margin: 10px;
+}
+
+#login-button {
+  margin: 10px;
+}
+
+#password-input {
+  margin: 10px;
+}
+
+#username-input {
+  margin: 10px;
+}
+
+.waiting-room-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  font-size: 30px;
+}
+
+.greeting {
+  margin: 40px;
+  line-height: 120%;
+}
+
+.drop-down {
+  padding: 20px;
+}
